@@ -14,3 +14,6 @@ Requerimientos No funcionales:
 -Almacenamiento no persistente de lista productos en las compras
 -Almacenamiento no persistente de anotaciones
 -traspaso de productos de comprados a inventario
+
+
+Presentacion https://youtu.be/nrX0kStzEIs
