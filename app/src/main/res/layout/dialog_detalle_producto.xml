@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="15dp"
+        android:background="@color/DarkOliveGreen">
+    </View>
+
+    <TextView
+        android:id="@+id/dialogNameTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nombre: "
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/dialogCantidadTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cantidad: "
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/dialogPrecioTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Precio: "
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/dialogCategoriaTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Categoría: "
+        android:textSize="20sp"/>
+
+    <TextView
+        android:id="@+id/dialogTiendaTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Tienda: "
+        android:textSize="20sp"/>
+</LinearLayout>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="15dp"
+            android:background="@color/DarkOliveGreen">
+        </View>
+        <EditText
+            android:id="@+id/nombreEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Nombre de la tienda" />
+
+        <EditText
+            android:id="@+id/direccionEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Dirección de la tienda" />
+
+        <EditText
+            android:id="@+id/horarioEditText"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Horario de atención" />
+
+        <Spinner
+            android:id="@+id/tiposPagoSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Selecciona el tipo de pago" />
+
+        <Spinner
+            android:id="@+id/categoriaSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:text="Selecciona la categoría" />
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
