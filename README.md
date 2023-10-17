@@ -1,6 +1,6 @@
 # StashByDas
 Creado por Daniel Arias
-Stash by Das se creo con el fin de suplir requerimientos que se mencionaran a continuacion
+Stash by Das se creo como una aplicacion para la gestion de compras en la vida de las personas y se nos pidio suplir requerimientos que se mencionaran a continuacion
 Requerimientos funcionales:
 -Pantalla de Presentacion
 -Pantalla de Acceso
