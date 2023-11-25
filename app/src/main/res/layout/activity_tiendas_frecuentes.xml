@@ -44,7 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="TIENDAS"
+                android:text="@string/Tiendas"
                 android:textSize="24sp" />
         </LinearLayout>
 
@@ -66,7 +66,7 @@
                 android:id="@+id/buttonAgregarTienda"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Agregar Tienda"
+                android:text="@string/agregartienda"
                 android:background="@color/DarkSeaGreen"
                 />
 

@@ -1,7 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -19,31 +17,31 @@
             android:id="@+id/nombreEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Nombre de la tienda" />
+            android:hint="@string/nombretienda" />
 
         <EditText
             android:id="@+id/direccionEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Dirección de la tienda" />
+            android:hint="@string/direcciontienda" />
 
         <EditText
             android:id="@+id/horarioEditText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Horario de atención" />
+            android:hint="@string/horarioatencion" />
 
         <Spinner
             android:id="@+id/tiposPagoSpinner"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="Selecciona el tipo de pago" />
+            android:text="@string/selecionatipopago" />
 
         <Spinner
             android:id="@+id/categoriaSpinner"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:text="Selecciona la categoría" />
+            android:text="@string/seleccionacategoria" />
 
 
     </LinearLayout>

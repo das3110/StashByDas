@@ -1,5 +1,6 @@
 package com.example.stashbydas
 
+import StorageUtil
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -25,7 +26,7 @@ class Compras : AppCompatActivity() {
     private lateinit var tvSaldo: TextView
     private lateinit var spinnerCategorias: Spinner
     private lateinit var spinnerTiendas: Spinner
-    private var precioTotalCompra = 0L
+    
     private val categorias = listOf("Alimento", "Ropa", "Electronica","Otros")
     private val tiendas = listOf("Supermercado", "Farmacia", "Feria","Negocio")
     private val listaProductos = mutableListOf<Producto>()
@@ -50,7 +51,7 @@ class Compras : AppCompatActivity() {
         btnAgregarProducto.setOnClickListener {
             agregarProducto()
         }
-        tvSaldo.text = "Saldo: $${GlobalVariables.presupuesto}"
+        tvSaldo.text = getString(R.string.saldo, GlobalVariables.presupuesto.toString())
         val recyclerView: RecyclerView = findViewById(R.id.recyclerViewProductos)
         productoAdapter = ProductoAdapter2(listaProductos) { position ->
             listaProductos.removeAt(position)
@@ -75,16 +76,19 @@ class Compras : AppCompatActivity() {
     private fun realizarCompra() {
         val precioTotal = calcularPrecioTotalDeProductos()
         if (precioTotal > GlobalVariables.presupuesto) {
-            Toast.makeText(this, "Saldo insuficiente", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.saldo_insuficiente), Toast.LENGTH_SHORT).show()
         } else {
             GlobalVariables.presupuesto -= precioTotal
             GlobalVariables.productList.addAll(listaProductos)
+
+
+            guardarProductosComprados()
+
             listaProductos.clear()
             productoAdapter.notifyDataSetChanged()
             clearFields()
-            tvSaldo.text = "Saldo: $${GlobalVariables.presupuesto}"
-            tvPrecioTotal.text = "Precio Total: $0"
-
+            tvSaldo.text = getString(R.string.saldo, GlobalVariables.presupuesto.toString())
+            tvPrecioTotal.text = getString(R.string.precio_total, "0")
         }
     }
     private val priceCalculator = object : TextWatcher {
@@ -96,7 +100,7 @@ class Compras : AppCompatActivity() {
             val cantidad = etCantidad.text.toString().toLongOrNull() ?: 0L
             val precio = etPrecio.text.toString().toLongOrNull() ?: 0L
             val precioTotal = cantidad * precio
-            tvPrecioTotal.text = "Precio Total: $$precioTotal"
+            tvPrecioTotal.text = getString(R.string.precio_total, precioTotal.toString())
         }
     }
     private fun agregarProducto() {
@@ -115,5 +119,9 @@ class Compras : AppCompatActivity() {
         etNombreProducto.text.clear()
         etCantidad.text.clear()
         etPrecio.text.clear()
+    }
+    private fun guardarProductosComprados() {
+        val productosComprados = StorageUtil.obtenerListaProductos(this) + listaProductos
+        StorageUtil.guardarListaProductos(this, productosComprados)
     }
 }

@@ -7,7 +7,7 @@
         android:id="@+id/nameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nombre"
+        android:text="@string/nombre"
         android:textSize="20sp" />
 
     <TextView
@@ -15,14 +15,20 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/nameTextView"
-        android:text="Cantidad: "
+        android:text="@string/Cantidad"
         android:textSize="18sp" />
-
+    <TextView
+        android:id="@+id/categoryTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/quantityTextView"
+        android:text="@string/Categoria"
+        android:textSize="18sp" />
     <Button
         android:id="@+id/deleteButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        android:text="Eliminar" />
+        android:text="@string/eliminar" />
 </RelativeLayout>

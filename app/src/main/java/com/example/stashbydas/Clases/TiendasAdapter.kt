@@ -23,16 +23,14 @@ class TiendasAdapter(
         val inflater = context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
         val listItemView = convertView ?: inflater.inflate(R.layout.lista_tiendas, null)
         val tienda = getItem(position)
-
         val nameTextView = listItemView.findViewById<TextView>(R.id.textViewNombreTienda)
-        val btnEditar = listItemView.findViewById<Button>(R.id.buttonEditar) // Agrega el botón "Editar"
-
+        val btnEditar = listItemView.findViewById<Button>(R.id.buttonEditar)
         nameTextView.text =  tienda?.nombre
 
 
         btnEditar.setOnClickListener {
             val alertDialogBuilder = AlertDialog.Builder(context)
-            alertDialogBuilder.setTitle("Editar Tienda")
+            alertDialogBuilder.setTitle(context.getString(R.string.editartienda))
 
             val inflater = LayoutInflater.from(context)
             val dialogView = inflater.inflate(R.layout.dialog_editar_tienda, null)
@@ -59,13 +57,12 @@ class TiendasAdapter(
             direccionEditText.setText(tienda?.direccion)
             horarioEditText.setText(tienda?.horario)
 
-            alertDialogBuilder.setPositiveButton("Guardar") { dialog, which ->
-                // Manejar la lógica de guardar los cambios en la tienda
+            alertDialogBuilder.setPositiveButton(context.getString(R.string.guardar)) { dialog, which ->
+
                 val nuevoNombre = nombreEditText.text.toString()
                 val nuevaDireccion = direccionEditText.text.toString()
                 val nuevoHorario = horarioEditText.text.toString()
 
-                // Actualizar la tienda con los nuevos valores
                 tienda?.nombre = nuevoNombre
                 tienda?.direccion = nuevaDireccion
                 tienda?.horario = nuevoHorario
@@ -75,7 +72,7 @@ class TiendasAdapter(
                 dialog.dismiss()
             }
 
-            alertDialogBuilder.setNegativeButton("Cancelar") { dialog, which ->
+            alertDialogBuilder.setNegativeButton(context.getString(R.string.cancelar)) { dialog, which ->
                 dialog.dismiss()
             }
 

@@ -24,11 +24,11 @@ class DetalleTiendas : AppCompatActivity() {
         val textViewPago = findViewById<TextView>(R.id.textDetallePagoTienda)
         val textViewCategoria = findViewById<TextView>(R.id.textDetalleCategoriaTienda)
 
-        textViewNombre.text = "Nombre:  "+tiendaNombre
-        textViewDireccion.text = "Direccion:  "+tiendaDireccion
-        textViewHorario.text = "Horario de atencion:  "+tiendaHorario
-        textViewPago.text = "Tipo de Pago:  "+tiendaPago
-        textViewCategoria.text = "Categoria:  "+tiendaCategoria
+        textViewNombre.text = getString(R.string.nombre_tiendas, tiendaNombre)
+        textViewDireccion.text = getString(R.string.direccion_tiendas, tiendaDireccion)
+        textViewHorario.text = getString(R.string.horario_tiendas, tiendaHorario)
+        textViewPago.text = getString(R.string.tipo_pago_tiendas, tiendaPago)
+        textViewCategoria.text = getString(R.string.categoria_tiendas, tiendaCategoria)
 
         val btnEliminar = findViewById<Button>(R.id.buttonEliminarTienda)
 

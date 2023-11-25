@@ -21,7 +21,7 @@
                 android:layout_width="295dp"
                 android:layout_height="70dp"
                 android:gravity="center"
-                android:text="Nombre de la tienda"
+                android:text="@string/nombretienda"
                 android:textSize="18sp" />
 
 
@@ -32,7 +32,7 @@
                 android:layout_marginRight="10dp"
                 android:background="@color/DarkSeaGreen"
                 android:focusable="auto"
-                android:text="Editar" />
+                android:text="@string/editar" />
 
         </LinearLayout>
 

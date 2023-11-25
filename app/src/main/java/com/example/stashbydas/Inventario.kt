@@ -1,12 +1,16 @@
 package com.example.stashbydas
 
+import StorageUtil
 import android.os.Bundle
+import android.view.View
+import android.widget.Button
+import android.widget.PopupMenu
+import android.widget.SearchView
 import android.widget.TextView
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.stashbydas.Clases.GlobalVariables
 import com.example.stashbydas.Clases.Producto
 import com.example.stashbydas.Clases.ProductoAdapter
 
@@ -24,18 +28,32 @@ class Inventario : AppCompatActivity() {
 
             )
     }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_inventario)
-        inventoryList.addAll(DefaultProductos.productList)
-        inventoryList.addAll(GlobalVariables.productList)
-        GlobalVariables.productList.clear()
+
+        if (inventoryList.isEmpty()) {
+            cargarProductos()
+        }
+
         val recyclerView: RecyclerView = findViewById(R.id.recyclerView)
         adapter = ProductoAdapter(inventoryList, this::mostrarDetalleProducto, this::eliminarProducto)
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(this)
+        val btnOrdenar: Button = findViewById(R.id.btnOrdenar)
+        btnOrdenar.setOnClickListener { mostrarMenuOrdenamiento(it) }
+        val searchView: SearchView = findViewById(R.id.searchView)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String?): Boolean {
+                return false
+            }
 
-
+            override fun onQueryTextChange(newText: String?): Boolean {
+                filtrarProductos(newText)
+                return true
+            }
+        })
     }
 
     private fun mostrarDetalleProducto(producto: Producto) {
@@ -46,21 +64,34 @@ class Inventario : AppCompatActivity() {
         val dialogCategoriaTextView = dialogView.findViewById<TextView>(R.id.dialogCategoriaTextView)
         val dialogTiendaTextView = dialogView.findViewById<TextView>(R.id.dialogTiendaTextView)
 
-        dialogNameTextView.text = "Nombre: ${producto.nombre}"
-        dialogCantidadTextView.text = "Cantidad: ${producto.cantidad}"
-        dialogPrecioTextView.text = "Precio: ${producto.precio}"
-        dialogCategoriaTextView.text = "Categoría: ${producto.categoria.joinToString(", ")}"
-        dialogTiendaTextView.text = "Tiendas: ${producto.tiendas.joinToString(", ")}"
+        dialogNameTextView.text = getString(R.string.Nombre) + producto.nombre
+        dialogCantidadTextView.text = getString(R.string.Cantidad) + producto.cantidad
+        dialogPrecioTextView.text = getString(R.string.Precio) + producto.precio
+        dialogCategoriaTextView.text = getString(R.string.Categoria) + producto.categoria.joinToString(", ")
+        dialogTiendaTextView.text = getString(R.string.Tienda) + producto.tiendas.joinToString(", ")
+
 
         val builder = AlertDialog.Builder(this)
         builder.setView(dialogView)
-        builder.setPositiveButton("Cerrar") { dialog, _ ->
+        builder.setPositiveButton(getString(R.string.cerrar)) { dialog, _ ->
             dialog.dismiss()
         }
         val dialog = builder.create()
         dialog.show()
     }
+    private fun cargarProductos() {
+        inventoryList.clear()
+        inventoryList.addAll(StorageUtil.obtenerListaProductos(this))
+    }
 
+    private fun guardarProductosEnAlmacenamiento() {
+        StorageUtil.guardarListaProductos(this, inventoryList)
+    }
+
+    override fun onPause() {
+        super.onPause()
+        guardarProductosEnAlmacenamiento()
+    }
     private fun eliminarProducto(producto: Producto) {
         if (producto.cantidad > 1) {
             producto.cantidad--
@@ -74,5 +105,46 @@ class Inventario : AppCompatActivity() {
         super.onResume()
         adapter.notifyDataSetChanged()
 
+    }
+    private fun ordenarPorNombre() {
+        inventoryList.sortBy { it.nombre }
+        actualizarLista()
+    }
+
+    private fun ordenarPorCategoria() {
+        inventoryList.sortBy { it.categoria.firstOrNull() ?: "" }
+        actualizarLista()
+    }
+
+    private fun ordenarPorCantidad() {
+        inventoryList.sortByDescending { it.cantidad }
+        actualizarLista()
+    }
+
+    private fun actualizarLista() {
+        adapter.notifyDataSetChanged()
+    }
+    private fun mostrarMenuOrdenamiento(view: View) {
+        val popupMenu = PopupMenu(this, view)
+        popupMenu.menuInflater.inflate(R.menu.menu_ordenar, popupMenu.menu)
+        popupMenu.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.ordenar_nombre -> ordenarPorNombre()
+                R.id.ordenar_categoria -> ordenarPorCategoria()
+                R.id.ordenar_cantidad -> ordenarPorCantidad()
+            }
+            true
+        }
+        popupMenu.show()
+    }
+    private fun filtrarProductos(texto: String?) {
+        val textoFiltrado = texto?.lowercase() ?: ""
+
+        val listaFiltrada = inventoryList.filter {
+            it.nombre.lowercase().contains(textoFiltrado) ||
+                    it.categoria.any { categoria -> categoria.lowercase().contains(textoFiltrado) }
+        }
+        adapter = ProductoAdapter(listaFiltrada, this::mostrarDetalleProducto, this::eliminarProducto)
+        findViewById<RecyclerView>(R.id.recyclerView).adapter = adapter
     }
 }

@@ -15,34 +15,34 @@
         android:id="@+id/dialogNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nombre: "
+        android:text="@string/nombre"
         android:textSize="20sp" />
 
     <TextView
         android:id="@+id/dialogCantidadTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Cantidad: "
+        android:text="@string/Cantidad"
         android:textSize="20sp"/>
 
     <TextView
         android:id="@+id/dialogPrecioTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Precio: "
+        android:text="@string/Precio"
         android:textSize="20sp"/>
 
     <TextView
         android:id="@+id/dialogCategoriaTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Categoría: "
+        android:text="@string/Categoria"
         android:textSize="20sp"/>
 
     <TextView
         android:id="@+id/dialogTiendaTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Tienda: "
+        android:text="@string/Tienda"
         android:textSize="20sp"/>
 </LinearLayout>

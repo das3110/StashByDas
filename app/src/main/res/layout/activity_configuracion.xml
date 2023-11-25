@@ -45,7 +45,7 @@
                 android:gravity=""
                 android:scaleX="2"
                 android:scaleY="2"
-                android:text="Modo Nocturno"
+                android:text="@string/modonocturno"
                 android:textSize="18sp" />
 
             <Button
@@ -53,8 +53,12 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                android:text="Tiempo Splash Screen"/>
-
+                android:text="@string/tiemposplashscreen"/>
+            <Button
+                android:id="@+id/buttonCambiarIdioma"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/cambiaridioma" />
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -68,7 +72,7 @@
                     android:layout_margin="20dp"
 
                     android:background="@color/DarkSeaGreen"
-                    android:text="Volver"
+                    android:text="@string/volver"
                     android:textSize="24sp" />
 
             </LinearLayout>

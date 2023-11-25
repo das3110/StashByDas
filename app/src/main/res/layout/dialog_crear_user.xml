@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -16,7 +14,7 @@
         android:id="@+id/editTextName"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nombre"
+        android:hint="@string/nombre"
         android:inputType="textPersonName"
         />
 
@@ -24,7 +22,7 @@
         android:id="@+id/editTextEmail"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Email"
+        android:hint="@string/email"
         android:inputType="textEmailAddress"
         />
 
@@ -32,14 +30,14 @@
         android:id="@+id/editTextCel"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Telefono"
+        android:hint="@string/telefono"
         />
 
     <EditText
         android:id="@+id/editTextPlata"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Presupuesto"
+        android:hint="@string/Presupuesto"
         android:inputType="number"
         />
 

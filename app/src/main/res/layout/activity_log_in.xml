@@ -44,7 +44,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
-                android:text="USUARIOS"
+                android:text="@string/usuarios"
                 android:textSize="24sp" />
         </LinearLayout>
 
@@ -66,7 +66,7 @@
                 android:id="@+id/buttonCrearUsuario"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Crear Usuario"
+                android:text="@string/crearusuario"
                 android:background="@color/DarkSeaGreen"
                 android:onClick="goCreateUser"/>
         </LinearLayout>

@@ -2,13 +2,15 @@ package com.example.stashbydas
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
+import android.content.res.Configuration
 import android.os.Bundle
 import android.widget.Button
 import android.widget.Switch
 import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import com.example.stashbydas.Clases.GlobalVariables
+import java.util.Locale
 
 class Configuracion : AppCompatActivity() {
 
@@ -45,7 +47,7 @@ class Configuracion : AppCompatActivity() {
             val listTimes = arrayOf("1", "2", "3", "4", "5")
 
             val xBuilder = AlertDialog.Builder(this)
-            xBuilder.setTitle("Seleccione el tiempo deseado")
+            xBuilder.setTitle(getString(R.string.seleccionetiempo))
             xBuilder.setSingleChoiceItems(listTimes, -1) { dialog, which ->
                 when (which) {
                     0 -> actualizarTiempo(1000)
@@ -61,7 +63,34 @@ class Configuracion : AppCompatActivity() {
             val xDialog = xBuilder.create()
             xDialog.show()
         }
-
+        val buttonCambiarIdioma = findViewById<Button>(R.id.buttonCambiarIdioma)
+        buttonCambiarIdioma.setOnClickListener {
+            mostrarDialogoCambioIdioma()
+        }
+    }
+    private fun mostrarDialogoCambioIdioma() {
+        val idiomas = arrayOf("Español", "English")
+        val builder = AlertDialog.Builder(this)
+        builder.setTitle(getString(R.string.seleccioneidioma))
+        builder.setItems(idiomas) { dialog, which ->
+            when (which) {
+                0 -> cambiarIdioma("es")
+                1 -> cambiarIdioma("en")
+            }
+            dialog.dismiss()
+        }
+        builder.show()
+    }
+    private fun cambiarIdioma(codigoIdioma: String) {
+        val locale = Locale(codigoIdioma)
+        Locale.setDefault(locale)
+        val config = Configuration()
+        config.locale = locale
+        baseContext.resources.updateConfiguration(config, baseContext.resources.displayMetrics)
+        val editor = getSharedPreferences("Preferencias", MODE_PRIVATE).edit()
+        editor.putString("IdiomaSeleccionado", codigoIdioma)
+        editor.apply()
+        recreate()
     }
 }
 private fun actualizarTiempo(dato:Long ){

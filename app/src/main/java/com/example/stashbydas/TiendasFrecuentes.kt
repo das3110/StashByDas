@@ -86,9 +86,9 @@ class TiendasFrecuentes : AppCompatActivity() {
         categoriaSpinner.adapter = categoriaAdapter
 
         val dialog = AlertDialog.Builder(this)
-            .setTitle("Agregar Nueva Tienda")
+            .setTitle(getString(R.string.agregarnuevatienda))
             .setView(dialogView)
-            .setPositiveButton("Crear") { _, _ ->
+            .setPositiveButton(getString(R.string.crear)) { _, _ ->
                 val nombreTienda = nombreEditText.text.toString()
                 val direccionTienda = direccionEditText.text.toString()
                 val horarioTienda = horarioEditText.text.toString()
@@ -101,7 +101,7 @@ class TiendasFrecuentes : AppCompatActivity() {
                 tiendas.add(nuevaTienda)
                 adapterItem.notifyDataSetChanged()
             }
-            .setNegativeButton("Cancelar") { _, _ ->
+            .setNegativeButton(getString(R.string.cancelar)) { _, _ ->
             }
             .create()
 

@@ -27,37 +27,37 @@
         android:id="@+id/etNombreProducto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nombre del producto" />
+        android:hint="@string/nombreProducto" />
 
     <EditText
         android:id="@+id/etCantidad"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Cantidad" />
+        android:hint="@string/cantidad" />
 
     <EditText
         android:id="@+id/etPrecio"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Precio" />
+        android:hint="@string/precio" />
     <Spinner
         android:id="@+id/spinnerCategorias"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Categoria del Producto"/>
+        android:text="@string/categoriaproducto"/>
 
     <Spinner
         android:id="@+id/spinnerTiendas"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:text="Tienda de Compra"/>
+        android:text="@string/tiendadecompra"/>
     <Button
         android:id="@+id/btnAgregarProducto"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Agregar Producto" />
+        android:text="@string/agregarproducto" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerViewProductos"
@@ -71,7 +71,7 @@
             android:id="@+id/tvPrecioTotal"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Precio Total: $0.00" />
+            android:text="@string/preciototal" />
 
         <TextView
             android:id="@+id/tvSaldo"
@@ -87,7 +87,7 @@
         android:id="@+id/buttonComprarProductos"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Comprar" />
+        android:text="@string/comprar" />
 
 
 </LinearLayout>

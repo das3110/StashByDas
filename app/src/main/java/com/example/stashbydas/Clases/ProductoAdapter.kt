@@ -16,6 +16,7 @@ class ProductoAdapter(private val items: List<Producto>,
     class InventoryViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         val nameTextView: TextView = itemView.findViewById(R.id.nameTextView)
         val quantityTextView: TextView = itemView.findViewById(R.id.quantityTextView)
+        val categoryTextView: TextView=itemView.findViewById(R.id.categoryTextView)
         val deleteButton: Button = itemView.findViewById(R.id.deleteButton)
     }
 
@@ -27,8 +28,11 @@ class ProductoAdapter(private val items: List<Producto>,
 
     override fun onBindViewHolder(holder: InventoryViewHolder, position: Int) {
         val currentItem = items[position]
+        val context = holder.itemView.context
         holder.nameTextView.text = currentItem.nombre
-        holder.quantityTextView.text = "Cantidad: ${currentItem.cantidad}"
+        holder.quantityTextView.text = context.getString(R.string.Cantidad) + " " + currentItem.cantidad
+        holder.categoryTextView.text = context.getString(R.string.Categoria) + ": " + currentItem.categoria.joinToString(", ")
+
         holder.itemView.setOnClickListener {
             onItemClick(currentItem)
         }

@@ -22,11 +22,10 @@ class UsuarioAdapter(
         val emailTextView = listItemView.findViewById<TextView>(R.id.textViewCantidadProducto)
         val telefonoTextView = listItemView.findViewById<TextView>(R.id.textViewTelefono)
         val presupuestoTextView=listItemView.findViewById<TextView>(R.id.textViewPlata)
-        nameTextView.text = " Nombre: "+ usuario?.nombre
-        emailTextView.text = " eMail: "+usuario?.email
-        telefonoTextView.text = " Telefono: "+usuario?.telefono
-        presupuestoTextView.text= " Presupuesto: "+usuario?.presupuesto.toString()
-
+        nameTextView.text = context.getString(R.string.nombre) + ": " + usuario?.nombre
+        emailTextView.text = context.getString(R.string.email) + ": " + usuario?.email
+        telefonoTextView.text = context.getString(R.string.telefono) + ": " + usuario?.telefono
+        presupuestoTextView.text = context.getString(R.string.Presupuesto) + ": " + usuario?.presupuesto.toString()
 
         return listItemView
     }

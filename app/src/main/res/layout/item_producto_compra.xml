@@ -7,7 +7,7 @@
         android:id="@+id/nombretxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Nombre"
+        android:text="@string/nombre"
         android:textSize="20sp" />
 
     <TextView
@@ -15,14 +15,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/nombretxt"
-        android:text="Cantidad: "
+        android:text="@string/Cantidad"
         android:textSize="18sp" />
     <TextView
         android:id="@+id/preciotxt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/cantidadtxt"
-        android:text="Precio: "
+        android:text="@string/Precio"
         android:textSize="18sp" />
 
     <Button
@@ -31,5 +31,5 @@
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
         android:layout_centerVertical="true"
-        android:text="Eliminar" />
+        android:text="@string/eliminar" />
 </RelativeLayout>

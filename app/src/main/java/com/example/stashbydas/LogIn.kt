@@ -11,6 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.example.stashbydas.Clases.GlobalVariables
 import com.example.stashbydas.Clases.Usuario
 import com.example.stashbydas.Clases.UsuarioAdapter
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
 
 class LogIn : AppCompatActivity() {
     private lateinit var usuario: MutableList<Usuario>
@@ -37,7 +39,7 @@ class LogIn : AppCompatActivity() {
 
         adapterItem = UsuarioAdapter(this, R.layout.list_usuario, usuario)
         listViewUsuarios.adapter = adapterItem
-
+        cargarUsuarios()
         listViewUsuarios.setOnItemClickListener { _, _, position, _ ->
             val selectedUsuario = usuario[position]
             GlobalVariables.userName = selectedUsuario.nombre
@@ -53,7 +55,7 @@ class LogIn : AppCompatActivity() {
                 val editTextMonto = dialogView.findViewById<EditText>(R.id.editTextMonto)
                 val dialog = AlertDialog.Builder(this)
                     .setView(dialogView)
-                    .setPositiveButton("Aceptar") { _, _ ->
+                    .setPositiveButton(getString(R.string.aceptar)) { _, _ ->
 
                         val montoStr = editTextMonto.text.toString()
                         if (montoStr.isNotEmpty() && montoStr.matches(Regex("-?\\d+(\\.\\d+)?"))) {
@@ -68,23 +70,21 @@ class LogIn : AppCompatActivity() {
                                     finish()
                                 }
                             } else {
-                                Toast.makeText(this, "El monto debe ser un número positivo", Toast.LENGTH_SHORT).show()
+                                Toast.makeText(this, getString(R.string.montopositivo), Toast.LENGTH_SHORT).show()
                             }
                         } else {
-                            Toast.makeText(this, "Ingrese un número válido", Toast.LENGTH_SHORT).show()
-
+                            Toast.makeText(this, getString(R.string.numerovalido), Toast.LENGTH_SHORT).show()
                         }
                     }
-                    .setNegativeButton("Cancelar") { _, _ ->
+                    .setNegativeButton(getString(R.string.cancelar)) { _, _ ->
                     }
                     .create()
 
                 dialog.show()
             }
         }
+
     }
-
-
     private fun showCrearUsuarioDialog() {
         val dialogView = layoutInflater.inflate(R.layout.dialog_crear_user, null)
         val editTextNombreUsuario = dialogView.findViewById<EditText>(R.id.editTextName)
@@ -92,9 +92,9 @@ class LogIn : AppCompatActivity() {
         val editTextTelefonoUsuario = dialogView.findViewById<EditText>(R.id.editTextCel)
         val editTextPlataUsuario = dialogView.findViewById<EditText>(R.id.editTextPlata)
         val dialog = AlertDialog.Builder(this)
-            .setTitle("Crear Nuevo Usuario")
+            .setTitle(getString(R.string.crearnuevousuario))
             .setView(dialogView)
-            .setPositiveButton("Crear") { _, _ ->
+            .setPositiveButton(getString(R.string.crear)) { _, _ ->
                 val nombreUsuario = editTextNombreUsuario.text.toString()
                 val correoUsuario = editTextCorreoUsuario.text.toString()
                 val telefonoUsuario = editTextTelefonoUsuario.text.toString()
@@ -105,11 +105,32 @@ class LogIn : AppCompatActivity() {
 
                 usuario.add(nuevoUsuario)
                 adapterItem.notifyDataSetChanged()
+                guardarUsuarios()
             }
-            .setNegativeButton("Cancelar") { _, _ ->
+            .setNegativeButton(getString(R.string.cancelar)) { _, _ ->
             }
             .create()
 
         dialog.show()
+    }
+    private fun guardarUsuarios() {
+        val sharedPreferences = getSharedPreferences("Usuarios", MODE_PRIVATE)
+        val editor = sharedPreferences.edit()
+        val json = Gson().toJson(usuario)
+        editor.putString("ListaUsuarios", json)
+        editor.apply()
+    }
+    private fun cargarUsuarios() {
+        val sharedPreferences = getSharedPreferences("Usuarios", MODE_PRIVATE)
+        val json = sharedPreferences.getString("ListaUsuarios", null)
+        if (json != null) {
+            val type = object : TypeToken<MutableList<Usuario>>() {}.type
+            val usuariosCargados = Gson().fromJson<MutableList<Usuario>>(json, type)
+
+            usuario.clear()
+            usuario.addAll(usuariosCargados)
+            adapterItem = UsuarioAdapter(this, R.layout.list_usuario, usuario)
+            listViewUsuarios.adapter = adapterItem
+        }
     }
 }
